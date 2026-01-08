@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "LeetCode Daily Reminder",
+  "description": "Duolingo-style daily reminders and streak tracking for LeetCode.",
+  "version": "1.0",
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "LeetCode Reminder"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "permissions": [
+    "storage",
+    "notifications",
+    "alarms"
+  ]
+}
