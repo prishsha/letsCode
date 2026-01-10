@@ -13,7 +13,7 @@ function getYesterday()
 {
     const date = new Date();
     date.setDate(date.getDate()-1);
-    const yest = date.substring(0, date.indexOf("T"));
+    const yest = date.toISOString().split("T")[0];
     return yest;
 }
 
@@ -33,7 +33,7 @@ chrome.storage.local.get(["streak", "lastSolved"], function(data){
 //when solved is clicked
 solved.addEventListener("click", () => {
     chrome.storage.local.get(["streak", "lastSolved"], (data) => {
-        const streak = data.streak || 0;
+        let streak = data.streak || 0;
         const lastSolved = data.lastSolved;
 
         if(lastSolved === getYesterday())
@@ -52,7 +52,7 @@ solved.addEventListener("click", () => {
                 lastSolved: today
             },
             () => {
-                streak.textContent = streak;
+                count.textContent = streak;
                 solved.disabled = true;
                 stat.textContent = "Streak Updated!";
             }
