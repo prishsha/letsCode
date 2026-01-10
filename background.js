@@ -56,7 +56,7 @@ function sendNotification()
 {
     chrome.notifications.create({
         type: "basic",
-        iconUrl: "icons/icon1.JPG",
+        iconUrl: "icons/icon1.png",
         title: "Leetcode Reminder",
         message: "Don't lose your streak! Solve daily!"
     });
