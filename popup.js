@@ -21,8 +21,18 @@ function getYesterday()
 chrome.storage.local.get(["streak", "lastSolved"], function(data){
     const streak = data.streak || 0;
     const lastSolved = data.lastSolved;
+    const yest = getYesterday();
 
     count.textContent = streak;
+
+    if(!lastSolved || lastSolved < yest)
+    {
+        count.textContent = 0;
+        stat.textContent = "You lost your streak! Start again today!"
+    }
+    else{
+        count.textContent = streak;
+    }
 
     if(lastSolved === getToday()){
         solved.disabled = true;
