@@ -28,32 +28,51 @@ const reminderTimes =[
 
 //create chrome alarm
 chrome.runtime.onInstalled.addListener(()=> {
-    chrome.alarms.create("leetcodeReminder", {
-        when: getTime(),
-        periodInMinutes: 24*60
+    reminderTimes.forEach((time) => {
+        const alarmTime = getNextTime(time.hour);
+
+        chrome.alarms.create("leetcodeReminder_", + time.name, {
+            when: alarmTime,
+            periodInMinutes: 24*60
+        });
     });
 });
 
-//returns time of alarm
-function getTime() {
-    const now = new Date();
-    const rem = new Date();
+//get next time for alarm
+function getNextTime(hour) {
+  const now = new Date();
+  const target = new Date();
 
-    rem.setHours(10, 21, 0, 0); //8pm
+  target.setHours(hour, 0, 0, 0);
 
-    //if its past 8pm, move alarm timer to next day
-    if(now>rem)
-    {
-        rem.setDate(rem.getDate() + 1);
-    }
+  if (target <= now) {
+    target.setDate(target.getDate() + 1);
+  }
 
-    return rem.getTime();
+  return target.getTime();
 }
+
+
+// //returns time of alarm
+// function getTime() {
+//     const now = new Date();
+//     const rem = new Date();
+
+//     rem.setHours(10, 21, 0, 0); //8pm
+
+//     //if its past 8pm, move alarm timer to next day
+//     if(now>rem)
+//     {
+//         rem.setDate(rem.getDate() + 1);
+//     }
+
+//     return rem.getTime();
+// }
 
 //runs the code when alarm rings
 chrome.alarms.onAlarm.addListener((alarm) => {
     console.log("Alarm fired");
-    if(alarm.name === "leetcodeReminder")
+    if(alarm.name.startsWith("leetcodeReminder_"))
     {
         checkAndNotify();
     }
