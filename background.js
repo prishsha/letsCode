@@ -1,3 +1,31 @@
+//reminder times
+const reminderTimes =[
+    {
+        name: "8am", 
+        hour: 8
+    },
+    {
+        name: "12pm", 
+        hour: 12
+    },
+    {
+        name: "4pm", 
+        hour: 16
+    },
+    {
+        name: "8pm", 
+        hour: 20
+    },
+    {
+        name: "10pm", 
+        hour: 22
+    },
+    {
+        name: "12am", 
+        hour: 0
+    },
+]
+
 //create chrome alarm
 chrome.runtime.onInstalled.addListener(()=> {
     chrome.alarms.create("leetcodeReminder", {
