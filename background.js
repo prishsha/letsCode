@@ -31,7 +31,7 @@ chrome.runtime.onInstalled.addListener(()=> {
     reminderTimes.forEach((time) => {
         const alarmTime = getNextTime(time.hour);
 
-        chrome.alarms.create("leetcodeReminder_", + time.name, {
+        chrome.alarms.create("leetcodeReminder_" + time.name, {
             when: alarmTime,
             periodInMinutes: 24*60
         });
