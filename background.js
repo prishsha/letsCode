@@ -2,27 +2,33 @@
 const reminderTimes =[
     {
         name: "8am", 
-        hour: 8
+        hour: 8,
+        message: "Good Morning! How about one leetcode to start the day?" 
     },
     {
         name: "12pm", 
-        hour: 12
+        hour: 12,
+        message: "Lunch break = Leetcode break?"
     },
     {
         name: "4pm", 
-        hour: 16
+        hour: 16,
+        message: "Better use the coffee rush to solve today's problem"
     },
     {
         name: "8pm", 
-        hour: 20
+        hour: 20,
+        message: "Save your streak now!"
     },
     {
         name: "10pm", 
-        hour: 22
+        hour: 22,
+        message: "Almost there! Dont lose today's streak"
     },
     {
         name: "12am", 
-        hour: 0
+        hour: 0,
+        message: "Last chance! Do your leetcode now!"
     },
 ]
 
@@ -74,7 +80,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     console.log("Alarm fired");
     if(alarm.name.startsWith("leetcodeReminder_"))
     {
-        checkAndNotify();
+        checkAndNotify(alarm.name);
     }
 });
 
@@ -86,7 +92,7 @@ function getToday()
 }
 
 //send notification only if not solved
-function checkAndNotify() 
+function checkAndNotify(alarmName) 
 {
     chrome.storage.local.get(["lastSolved"], (data) => {
         const lastSolved = data.lastSolved;
