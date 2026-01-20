@@ -101,7 +101,7 @@ function getToday()
 }
 
 //send notification only if not solved
-function checkAndNotify(alarmName) 
+function checkAndNotify(message) 
 {
     chrome.storage.local.get(["lastSolved"], (data) => {
         const lastSolved = data.lastSolved;
@@ -109,17 +109,17 @@ function checkAndNotify(alarmName)
 
         if(lastSolved !== today)
         {
-            sendNotification();
+            sendNotification(message);
         }
     });
 }
 
-function sendNotification()
+function sendNotification(message)
 {
     chrome.notifications.create({
         type: "basic",
         iconUrl: "icons/icon1.png",
         title: "Leetcode Reminder",
-        message: "Don't lose your streak! Solve daily!"
+        message
     });
 }
