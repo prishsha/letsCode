@@ -75,12 +75,21 @@ function getNextTime(hour) {
 //     return rem.getTime();
 // }
 
+//create a reminder map
+const reminderMap = Object.fromEntries(
+    reminderTimes.map(r => [
+        "leetcodeReminder_" + r.name,
+        r.message
+    ])
+);
+
 //runs the code when alarm rings
 chrome.alarms.onAlarm.addListener((alarm) => {
     console.log("Alarm fired");
     if(alarm.name.startsWith("leetcodeReminder_"))
     {
-        checkAndNotify(alarm.name);
+        const message = reminderMap[alarm.name];
+        checkAndNotify(message);
     }
 });
 
